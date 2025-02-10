@@ -1,0 +1,141 @@
+<% layout("./layouts/boilerplate.ejs") %>
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filters {
+    color: rgb(17, 111, 17);
+    text-align: center;
+    margin-right: 4rem;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .filters:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .filters p {
+    font-size: 0.9rem;
+  }
+
+  .tax-info {
+    display: none;
+  }
+
+  .tax-toggle {
+    border: 1px solid rgb(17, 111, 17);
+    border-radius: 1rem;
+    height: 3.5rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+</style>
+
+<div id="filters">
+  <div class="filters" data-filter="Trending">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Trending</p>
+  </div>
+  <div class="filters" data-filter="Room">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Room</p>
+  </div>
+  <div class="filters" data-filter="Castles">
+    <div><i class="fa-solid fa-landmark"></i></div>
+    <p>Castles</p>
+  </div>
+  <div class="filters" data-filter="Pools">
+    <div><i class="fa-solid fa-person-swimming"></i></div>
+    <p>Pools</p>
+  </div>
+  <div class="filters" data-filter="Mountain city">
+    <div><i class="fa-solid fa-mountain-sun"></i></div>
+    <p>Mountain city</p>
+  </div>
+  <div class="filters" data-filter="Beach">
+    <div><i class="fa-solid fa-umbrella-beach"></i></div>
+    <p>Beach</p>
+  </div>
+  <div class="filters" data-filter="Dom">
+    <div><i class="fa-solid fa-rainbow"></i></div>
+    <p>Dom</p>
+  </div>
+  <div class="filters" data-filter="Lake View">
+    <div><i class="fa-solid fa-water"></i></div>
+    <p>Lake View</p>
+  </div>
+  <div class="filters" data-filter="Boats">
+    <div><i class="fa-solid fa-ferry"></i></div>
+    <p>Boats</p>
+  </div>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input green-checkbox"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault"
+      />
+      <label class="form-check-label" for="flexSwitchCheckDefault"
+        >Display total after Taxes</label
+      >
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 mt-3">
+  <% for(let listings of allListings){ %>
+  <a href="/listings/<%= listings._id %>" class="listing-link">
+    <div class="card col listing-card" style="width: 20rem">
+      <img
+        src="<%= listings.image.url %>"
+        class="card-img-top"
+        alt="Listing_image"
+        style="height: 20rem"
+      />
+      <div class="card-img-overlay"></div>
+      <div class="card-body">
+        <p class="card-text">
+          <b><%= listings.title %></b><br />
+          &#8377;<%= listings.price.toLocaleString("en-IN") %>/Night
+          <i class="tax-info">+18% GST</i>
+          <!-- <i class="fa-regular fa-heart likeButton" data-liked="false"></i> -->
+        </p>
+      </div>
+    </div>
+    <% } %>
+  </a>
+</div>
+
+
+<script>
+  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
+
+  document.querySelectorAll('.filters').forEach(filter => {
+    filter.addEventListener('click', () => {
+      const selectedFilter = filter.getAttribute('data-filter');
+      if (selectedFilter) {
+        // Redirect with the filter query
+        window.location.href = `/listings?filter=${encodeURIComponent(selectedFilter)}`;
+      }
+    });
+  });
+</script>

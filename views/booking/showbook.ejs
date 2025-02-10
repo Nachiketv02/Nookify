@@ -1,0 +1,17 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="card col-6 offset-3 show-card listing-card mt-2">
+  <h3>Booking Invoice!</h3>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      checkIn Date : <%= bookInfo.checkIn.toLocaleString('en-IN') %>
+    </li>
+    <li class="list-group-item">
+      checkIn Date : <%= bookInfo.checkOut.toLocaleString('en-IN') %>
+    </li>
+    <li class="list-group-item">Mobile no : <%= bookInfo.mobile %></li>
+    <li class="list-group-item">Adults : <%= bookInfo.adult %></li>
+    <li class="list-group-item">Children : <%= bookInfo.child %></li>
+    <li class="list-group-item">Total Price : <%= bookInfo.totalPrice %></li>
+  </ul>
+</div>

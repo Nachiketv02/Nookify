@@ -1,0 +1,79 @@
+<style>
+  .sarchB {
+    display: flex;
+    align-items: center;
+  }
+  .rounded-input {
+    border-radius: 50px;
+    border: 1px solid #75e990;
+    padding: 10px 20px;
+  }
+
+  .rounded-input:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+  }
+
+  .rounded-button {
+    border-radius: 50px;
+    padding: 10px 10px;
+    border: none;
+  }
+</style>
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-solid fa-house"></i>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings"><b>Explore</b></a>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <!-- <form class="d-flex" role="search">
+          <input
+            class="form-control me-2 rounded-input"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success rounded-button" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form> -->
+        <form class="d-flex" action="/listings/search" method="GET">
+          <input
+            class="form-control me-2 rounded-input"
+            type="search"
+            name="query"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success rounded-button" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <b>
+          <% if (currUser && currUser.role === "admin") { %>
+              <a href="/admin/dashboard" class="nav-link text-green-600" style="color: rgb(36, 122, 36)">Admin Panel</a>
+          <% } %>
+        </b>
+        <a class="nav-link" href="/listings/new"><b>Earn with Nookify</b></a>
+        <% if(!currUser) { %>
+        <b>
+          <a class="nav-link" href="/signup" style="color: rgb(36, 122, 36)">SignUp</a>
+        </b>
+        <b>
+          <a class="nav-link" href="/login" style="color: rgb(36, 122, 36)">LogIn</a>
+        </b>
+        <% } %> <% if(currUser) { %>
+        <b><a class="nav-link" href="/logout">LogOut</a></b>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

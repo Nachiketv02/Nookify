@@ -1,0 +1,60 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<div class="col-6 offset-3 mt-1">
+    <h3>Book the Property!</h3>
+</div>
+<div class="col-8 offset-3 mt-3">
+  <form method="post" action="/book" class="needs-validation" novalidate>
+    <div class="row">
+      <div class="mb-3 col-md-4">
+        <label for="checkIn" class="form-lable">CheckIn Date</label>
+        <input type="date" name="checkIn" class="form-control" id="checkIn" required />
+      </div>
+
+      <div class="mb-3 col-md-4">
+        <label for="checkOut" class="form-lable">CheckOut Date</label>
+        <input type="date" class="form-control" name="checkOut" id="checkOut" required />
+        <div class="invalid-feedback">Enter a Valid Date</div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="audlt" class="form-lable">Audlt</label>
+          <input type="number" class="form-control" name="adult" min="1" max="4" required />
+          <div class="invalid-feedback">Please enter valid Number</div>
+        </div>
+        <div class="mb-3 col-md-4">
+          <label for="audlt" class="form-lable">Child</label>
+          <input type="number" class="form-control" name="child" min="1" max="2" required />
+          <div class="invalid-feedback">Please enter valid Number</div>
+        </div>
+      </div>
+
+    <div class="mb-3 col-md-4">
+      <label for="mobile" class="form-lable">Mobile No</label>
+      <input type="number" class="form-control" name="mobile" required />
+      <div class="invalid-feedback">Please enter valid Number</div>
+    </div>
+    <input type="hidden" id="listingId" name="listingId" value="<%=listing._id %>">
+
+    <button class="btn btn-dark mb-3 add-btn">Book</button>
+  </form>
+</div>
+
+
+<script>
+  const checkInInput = document.getElementById('checkIn');
+  const checkOutInput = document.getElementById('checkOut');
+
+  const today = new Date().toISOString().split('T')[0];
+  checkInInput.setAttribute('min', today);
+  checkOutInput.setAttribute('min', today);
+
+  checkInInput.addEventListener('change', function() {
+    const checkInDate = new Date(this.value);
+    checkOutInput.setAttribute('min', this.value);
+    if (checkOutInput.value && new Date(checkOutInput.value) < checkInDate) {
+      checkOutInput.value = '';
+    }
+  });
+</script>

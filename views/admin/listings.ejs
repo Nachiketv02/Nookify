@@ -1,0 +1,33 @@
+<% layout("admin/layout") %>
+
+<div>
+  <h1 class="text-3xl font-bold mb-6">Manage Listings</h1>
+  <a href="/listings" class="bg-green-600 text-white px-4 py-2 rounded">Home Page</a>
+
+  <table class="mt-4 w-full bg-white shadow-md rounded-lg">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="px-4 py-2">Title</th>
+        <th class="px-4 py-2">Price</th>
+        <th class="px-4 py-2">Location</th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% listings.forEach(listing => { %>
+      <tr>
+        <td class="px-4 py-2"><%= listing.title %></td>
+        <td class="px-4 py-2">&#8377;<%= listing.price %></td>
+        <td class="px-4 py-2"><%= listing.location %></td>
+        <td class="px-4 py-2">
+          <a href="/admin/listings/<%= listing._id %>/edit" class="text-blue-600">Edit</a>
+          <form action="/admin/listings/<%= listing._id %>?_method=DELETE" method="POST" class="inline">
+            <button type="submit" class="text-red-600">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+    

@@ -1,0 +1,28 @@
+<% layout("admin/layout") %>
+
+<div>
+  <h1 class="text-3xl font-bold mb-6">Manage Bookings</h1>
+
+  <table class="mt-4 w-full bg-white shadow-md rounded-lg">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="px-4 py-2">User</th>
+        <th class="px-4 py-2">Listing</th>
+        <th class="px-4 py-2">Check-In</th>
+        <th class="px-4 py-2">Check-Out</th>
+        <th class="px-4 py-2">Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% bookings.forEach(booking => { %>
+        <tr>
+          <td class="px-4 py-2"><%= booking.author ? booking.author.username : "N/A" %></td>
+          <td class="px-4 py-2"><%= booking.listingP ? booking.listingP.title : "N/A" %></td>
+          <td class="px-4 py-2"><%= booking.checkIn ? booking.checkIn.toLocaleDateString() : "N/A" %></td>
+          <td class="px-4 py-2"><%= booking.checkOut ? booking.checkOut.toLocaleDateString() : "N/A" %></td>
+          <td class="px-4 py-2">&#8377;<%= booking.totalPrice %></td>
+        </tr>        
+      <% }) %>
+    </tbody>
+  </table>
+</div>

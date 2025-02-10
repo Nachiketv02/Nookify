@@ -1,0 +1,24 @@
+<% layout("admin/layout") %>
+
+<div>
+  <h1 class="text-3xl font-bold mb-6">Manage Users</h1>
+
+  <table class="mt-4 w-full bg-white shadow-md rounded-lg">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Email</th>
+        <th class="px-4 py-2">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+      <tr>
+        <td class="px-4 py-2"><%= user.username %></td>
+        <td class="px-4 py-2"><%= user.email %></td>
+        <td class="px-4 py-2"><%= user.role %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
